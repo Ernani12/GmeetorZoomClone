@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HOME</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/peerjs/1.3.1/peerjs.min.js.map"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <script>
+      const ROOM_ID = "<%= roomId %>";
+
+      window.addEventListener('beforeunload', function (e) { 
+        e.preventDefault(); 
+        e.returnValue = ''; 
+        
+      }); 
+
+    </script>
+
+
+<style>
+  .x.fa-video-camera:after {
+    position: absolute;
+    content: "X";
+    color: white;
+    font-weight: bold;
+    font-size: 1em;
+    top: 1%;
+    text-shadow: 3px 0px 0px rgb(255, 9, 9);
+    line-height: 20px;
+    left: 42%;
+    font-family: Arial;
+  }
+
+
+
+</style>
+  </head>
+  <body>
+
+<div class="main">
+      <div class="main__left">
+        <div class="main__videos">
+          <div id="video-grid"></div>
+        </div>
+        <div class="main__controls">
+          <div class="main__controls_block">
+            <div
+              class="main__controls_button"
+              id="muteButton"
+              onclick="muteUnmute()">
+              <i class="fa fa-microphone"></i>
+              <span>Mute</span>
+          </div>
+
+          <div class="main__controls_button"
+              id="playPauseVideo"
+              onclick="playStop()">
+              <i class="fa fa-video-camera"></i>
+              <span>Pause Video</span>
+            </div>
+
+
+           
+          <div class="main__controls_button">
+              
+                <button style="color:red; background-color: transparent; border: none; font-size:20px"  class="start-recording mx-4 flex-1 bg-gradient-to-br from-purple-500 to to-pink-500 p-4 uppercase text-lg font-bold transition-all duration-300 hover:opacity-90 disabled:opacity-50 fa fa-video-camera"><br>Gravar Video Aula</button>      
+              
+          </div>
+         
+          <div class="main__controls_button" >
+                      
+              <button style="color:red; background-color: transparent; border: none; font-size:20px" onclick="Display()" class="stop-recording mx-8 flex-1 bg-gradient-to-br from-purple-500 to to-pink-500 p-4 uppercase text-lg font-bold transition-all duration-300 hover:opacity-90 disabled:opacity-50 x fa fa-video-camera"   ><br>Para de Gravar</button>   
+            
+          </div>
+        
+          <div class="main__controls_button" >
+            
+            <i class="bi bi-arrow-up-square-fill"></i>
+        </div>
+      
+        <div class="main__controls_button " >
+            
+          <button id="start">
+          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-arrow-up-square" viewBox="0 0 16 16" >
+            <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm8.5 9.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z "/>
+          </svg>
+        </button>
+      </div>
+    
+      <div class="main__controls_button" >
+          
+        <button id="stop" class="fa fa-window-close" aria-hidden="true" style='color: red'>
+          
+          
+      </button>
+    </div>
+    
+     
+ 
+            <div class="main__controls_button">
+              <i class="fa fa-comment"></i>
+              <span>Chat</span>
+            </div>
+          </div>
+
+      
+          <div class="recorded-video-wrap"  >
+          
+            <div class="flex flex-wrap -mx-4 " >
+              <a class="download-video text-center mx-4 flex-1 bg-gradient-to-br from-purple-500 to to-pink-500 p-4 uppercase text-lg font-bold transition-all duration-300 hover:opacity-90 disabled:opacity-50" disabled>
+               <h2>Aula Download</h2>
+              </a>
+            </div>
+          </div>
+
+        
+
+      <div class="main__controls_block" >
+            
+        <div class="stopserver main__controls_button leaveMeeting"  id="leave-meeting" style="font-size: 12px;">
+              <i class="fa fa-times fa-lg" onclick="Killserver()"></i>
+              <span class="">Leave Meeting</span>
+            </div>
+          </div>
+        </div> 
+      </div>
+
+      <div class="main__right"> <!--chat de coversa-->
+        <div class="main__header">
+          <h6>Chat</h6>
+        </div>
+        <div class="main__chat__window" id="main__chat__window">
+          <ul class="messages" id="all_messages"></ul>
+        </div>
+        <div class="main__message_container">
+          <input
+            type="text"
+            id="chat_message"
+            placeholder="Type message here.."
+          />
+        </div>
+      </div>
+
+  
+
+
+</div> <!--fim do main-->
+    <script src="script.js"></script>
+    <script src="server.js"></script>
+
+  </body>
+</html>

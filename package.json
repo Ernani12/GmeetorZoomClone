@@ -1,0 +1,29 @@
+{
+  "name": "zoom-clone",
+  "version": "1.0.0",
+  "description": "ERROR: No README data found!",
+  "main": "server.js",
+  "scripts": {
+    "browsersync": "browser-sync start --proxy localhost:3030 --files 'public,views'",
+    "nodemon": "nodemon server.js",
+    "start_b": "concurrently --kill-others \"npm run nodemon\" \"npm run browsersync\" ",
+    "start": "npm-run-all -p nodemon browsersync"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "BSD",
+  "dependencies": {
+    "browser-sync": "^2.27.7",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.15",
+    "npm-run-all": "^4.1.5",
+    "peer": "^0.5.3",
+    "socket.io": "^2.3.0",
+    "uuid": "^8.3.0"
+  },
+  "devDependencies": {
+    "concurrently": "^7.0.0",
+    "http-server": "^14.0.0"
+  }
+}
